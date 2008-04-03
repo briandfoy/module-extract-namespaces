@@ -1,0 +1,5 @@
+0.10_01 - Thu Apr  3 11:48:51 2008
+	* This is the initial release while I'm at the Oslo QA Hackathon
+	* Extract the package declarations in a file to see which namespaces
+	are in it
+
