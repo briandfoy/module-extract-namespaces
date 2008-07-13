@@ -8,7 +8,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.10_01';
+$VERSION = '0.11_01';
 
 use Carp qw(croak);
 use PPI;
@@ -217,6 +217,8 @@ sub get_namespaces_from_pdom
 			0 
 			}
 		);
+	
+	return unless $package_statements;
 	
 	my @namespaces = map {
 		/package \s+ (\w+(::\w+)*) \s* ; /x;
