@@ -3,3 +3,7 @@
 	* Extract the package declarations in a file to see which namespaces
 	are in it
 
+0.11_01 - Fri Aug  8 06:06:48 2008
+	* Handle the PDOMs a bit more carefully in case things
+	go terribly wrong
+
