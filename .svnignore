@@ -5,3 +5,5 @@ Makefile.old
 blib
 *.tar.gz
 *.tar
+*gz
+cover_db
