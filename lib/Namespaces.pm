@@ -92,9 +92,10 @@ sub from_file
 	my( $class, $file ) = @_;
 
 	my $Document = $class->get_pdom( $file );
+	return unless $Document;
 	
 	my @namespaces = $class->get_namespaces_from_pdom( $Document );
-		
+	
 	if( wantarray ) { @namespaces }
 	else            { $namespaces[0] }
 	}
@@ -174,9 +175,11 @@ sub pdom_preprocess
 	{ 
 	my( $class, $Document ) = @_;
 
-	$class->pdom_strip_pod( $Document );
-	$class->pdom_strip_comments( $Document );
-	
+	eval {
+		$class->pdom_strip_pod( $Document );
+		$class->pdom_strip_comments( $Document );
+		};
+		
 	return 1;
 	}
 
@@ -218,12 +221,16 @@ sub get_namespaces_from_pdom
 			}
 		);
 	
-	return unless $package_statements;
+	my @namespaces = eval {
+		map {
+			/package \s+ (\w+(::\w+)*) \s* ; /x;
+			$1
+			} @$package_statements
+		};
+		
+	#print STDERR "Got namespaces @namespaces\n";
 	
-	my @namespaces = map {
-		/package \s+ (\w+(::\w+)*) \s* ; /x;
-		$1
-		} @$package_statements;
+	@namespaces;
 		
 	}	
 
