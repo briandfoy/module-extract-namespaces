@@ -8,7 +8,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.11_01';
+$VERSION = '0.12';
 
 use Carp qw(croak);
 use PPI;
