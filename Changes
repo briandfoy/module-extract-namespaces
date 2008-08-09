@@ -3,6 +3,10 @@
 	* Extract the package declarations in a file to see which namespaces
 	are in it
 
+0.12 - Sat Aug  9 08:59:42 2008
+	* This is still an early version of the module
+	* This version takes more care to catch PPI problems
+
 0.11_01 - Fri Aug  8 06:06:48 2008
 	* Handle the PDOMs a bit more carefully in case things
 	go terribly wrong
