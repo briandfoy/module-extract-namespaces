@@ -8,7 +8,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 use Carp qw(croak);
 use PPI;
@@ -240,18 +240,11 @@ sub get_namespaces_from_pdom
 
 * Add caching based on file digest?
 
-=head1 SEE ALSO
-
-
 =head1 SOURCE AVAILABILITY
 
-This source is part of a SourceForge project which always has the
-latest sources in CVS, as well as all of the previous releases.
+This code is in Github:
 
-	http://sourceforge.net/projects/brian-d-foy/
-
-If, for some reason, I disappear from the world, one of the other
-members of the project can shepherd this module appropriately.
+	git://github.com/briandfoy/module-extract-namespaces.git
 
 =head1 AUTHOR
 

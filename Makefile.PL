@@ -17,6 +17,12 @@ WriteMakefile(
 		'PPI'        => '0',
 		},
 
+	'META_MERGE'   => {
+		no_index => {
+			directory => [ qw(inc t corpus) ],
+			},
+		},
+		
 	'PM'           => {
 		'lib/Namespaces.pm'         => '$(INST_LIBDIR)/Namespaces.pm',
 		},
