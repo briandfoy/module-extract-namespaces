@@ -3,6 +3,10 @@
 	* Extract the package declarations in a file to see which namespaces
 	are in it
 
+0.13 - Tue Sep 16 21:40:36 2008
+	* Adding bits to META.yml with MakeMaker's new META_MERGE feature
+	* Moved everything to github, so the new source URL is, well, new
+
 0.12 - Sat Aug  9 08:59:42 2008
 	* This is still an early version of the module
 	* This version takes more care to catch PPI problems
