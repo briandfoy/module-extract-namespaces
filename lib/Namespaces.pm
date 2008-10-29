@@ -8,7 +8,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.13';
+$VERSION = '0.14';
 
 use Carp qw(croak);
 use PPI;
@@ -49,6 +49,8 @@ It does not extract:
 
 =item from_module( MODULE )
 
+****NOT YET IMPLEMENTED****
+
 Extract the namespaces declared in MODULE. In list context, it returns
 all of the namespaces, including possible duplicates. In scalar context
 it returns the first declared namespace.
@@ -63,8 +65,12 @@ XXX: On failure? Some files do not have packages
 sub from_module
 	{
 	croak "from_module not yet implemented!";
+
+=begin comment
 	
 	my( $class, $module, @dirs ) = @_;
+
+	$class->_clear_error;
 	
 	my $relative_path = $class->_module_to_file( $module );
 	my $absolute_path = $class->_rel2abs( $relative_path );
@@ -72,6 +78,11 @@ sub from_module
 	
 	if( wantarray ) { my @a = $class->from_file( $absolute_path ) }
 	else            { scalar  $class->from_file( $absolute_path ) }
+
+=end comment
+
+=cut
+
 	}
 
 =item from_file( FILENAME )
@@ -91,6 +102,14 @@ sub from_file
 	{
 	my( $class, $file ) = @_;
 
+	$class->_clear_error;
+	
+	unless( -e $file )
+		{
+		$class->_set_error( "File [$file] does not exist!" );
+		return;
+		}
+	
 	my $Document = $class->get_pdom( $file );
 	return unless $Document;
 	
@@ -148,14 +167,15 @@ sub get_pdom
 		my $pdom_document_class = $class->pdom_document_class;
 
 		my $d = $pdom_document_class->new( $file );
-
+		die $pdom_document_class->errstr unless $d;
+		
 		$class->pdom_preprocess( $d );
 		$d;
 		};
 
 	if( $@ )
 		{
-		warn( "Could not get PDOM for $file: $@" );
+		$class->_set_error( "Could not get PDOM for $file: $@" );
 		return;
 		}
 		
@@ -233,6 +253,22 @@ sub get_namespaces_from_pdom
 	@namespaces;
 		
 	}	
+
+=item $class->error
+
+Return the error from the last call to C<get_modules>.
+
+=cut
+
+BEGIN {
+my $Error = '';
+
+sub _set_error   { $Error = $_[1]; }
+
+sub _clear_error { $Error = '' }
+
+sub error        { $Error }
+}
 
 =back
 

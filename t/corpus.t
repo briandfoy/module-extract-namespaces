@@ -1,13 +1,19 @@
 use strict;
 use warnings;
 
-use File::Spec;
+use File::Spec::Functions qw(catfile);
 
 use Test::More 'no_plan';
 
-use_ok( 'Module::Extract::Namespaces' );
-can_ok( 'Module::Extract::Namespaces', qw(from_file) );
+my $class  = 'Module::Extract::Namespaces';
+my $method = 'from_file';
 
+use_ok( $class );
+can_ok( $class, $method );
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #	
+# Test with files that exist
+{
 my %Corpus = (
 	'None.pm'           => [],   # Perl code but no package
 	'Empty.pm'          => [],   # nothing in the file
@@ -18,13 +24,37 @@ my %Corpus = (
 	
 foreach my $file ( sort keys %Corpus )
 	{
-	my $path = File::Spec->catfile( 'corpus', $file );
+	my $path = 
+	catfile( 'corpus', $file );
 	ok( -e $path, "Corpus file [ $path ] exists" );
 	
-	my $namespaces = [ 
-		eval{ Module::Extract::Namespaces->from_file( $path ) } 
-		];
-		
-	is_deeply( $namespaces, $Corpus{$file}, "Works for $file" );
-	
+	my $namespaces = [ $class->$method( $path ) ];
+	ok( ! $class->error, "No error from good file [$file]");
+	is_deeply( $namespaces, $Corpus{$file}, "Extracts right namespaces for $file" );
 	}
+}
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #	
+# Test with a file that doesn't exist
+{
+my $file = "foobarbazquux.html.gz.pm";
+ok( ! -e $file, "File [$file] is properly missing" );
+
+my $namespaces = [ $class->$method( $file ) ];
+like( $class->error, qr/does not exist/, "Trying to parse missing file sets right error" );
+is_deeply( $namespaces, [], "No modules extracted from missing file" );
+
+}
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #	
+# Test with a file that does exist, but isn't Perl
+TODO: {
+local $TODO = "Somehow PPI still creates an object";
+my $file = catfile( qw(corpus not_perl.txt) );
+ok( -e $file, "Non Perl file [$file] exists" );
+
+my $rc = eval {  $class->$method( $file ) };
+my $at = $@;
+ok( ! defined $rc,  "$method returns undef for non-Perl file [$file]" );
+like( $class->error, qr/PDOM/, "Trying to parse non-Perl file sets right error" );
+}

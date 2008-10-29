@@ -17,3 +17,6 @@ pm_to_blib
 t/\d
 t/cover_db*
 ^cover_db\b
+.git
+.gitignore
+research

@@ -2,3 +2,5 @@ Makefile
 Module-*
 blib
 pm_to_blib
+cover_db
+*.bak
