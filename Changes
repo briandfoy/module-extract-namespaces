@@ -1,7 +1,4 @@
-0.10_01 - Thu Apr  3 11:48:51 2008
-	* This is the initial release while I'm at the Oslo QA Hackathon
-	* Extract the package declarations in a file to see which namespaces
-	are in it
+# Changes for Module::Extract::Namespaces
 
 0.13 - Tue Sep 16 21:40:36 2008
 	* Adding bits to META.yml with MakeMaker's new META_MERGE feature
@@ -14,4 +11,9 @@
 0.11_01 - Fri Aug  8 06:06:48 2008
 	* Handle the PDOMs a bit more carefully in case things
 	go terribly wrong
+
+0.10_01 - Thu Apr  3 11:48:51 2008
+	* This is the initial release while I'm at the Oslo QA Hackathon
+	* Extract the package declarations in a file to see which namespaces
+	are in it
 

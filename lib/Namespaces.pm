@@ -23,9 +23,11 @@ Module::Extract::Namespaces - extract the package declarations from a module
 
 	# in scalar context, extract first package namespace
 	my $namespace  = Module::Extract::Namespaces->from_module( 'Foo::Bar' );
-
+	if( Module::Extract::Namespaces->error ) { ... }
+	
 	# in list context, extract all namespaces
 	my @namespaces = Module::Extract::Namespaces->from_file( $filename );
+	if( Module::Extract::Namespaces->error ) { ... }
 	
 
 =head1 DESCRIPTION
@@ -58,7 +60,8 @@ it returns the first declared namespace.
 If it cannot find MODULE in @INC, it returns undef in scalar context and
 the empty list in list context.
 
-XXX: On failure? Some files do not have packages
+On failure it returns nothing, but you have to check with C<error> to
+see if that is really an error or a file with no namespaces in it.
 
 =cut
 
@@ -94,7 +97,8 @@ it returns the first declared namespace.
 If FILENAME does not exist, it returns undef in scalar context and
 the empty list in list context.
 
-XXX: On failure? Some files do not have packages
+On failure it returns nothing, but you have to check with C<error> to
+see if that is really an error or a file with no namespaces in it.
 
 =cut
 	
