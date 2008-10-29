@@ -1,5 +1,10 @@
 # Changes for Module::Extract::Namespaces
 
+0.14 - Wed Oct 29 12:59:58 2008
+	* Adding an error() method so you can check what went wrong.
+	That means no more carping and stomping all over your terminal
+	or log file unless you want that.
+
 0.13 - Tue Sep 16 21:40:36 2008
 	* Adding bits to META.yml with MakeMaker's new META_MERGE feature
 	* Moved everything to github, so the new source URL is, well, new
