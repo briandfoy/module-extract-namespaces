@@ -10,13 +10,13 @@ use Test::More 0.96 tests => 3;
 use Test::Fatal;
 
 my (@namespaces);
-my $file = catfile( 'corpus', 'perl-5-14-package.pm' );
+my $file = catfile( 'corpus', 'perl-5-12-package.pm' );
 
 is( exception { @namespaces = Module::Extract::Namespaces->from_file($file) },
   undef, 'Calling ->from_file does not return an exception' );
 
 SKIP: {
-  skip "Need Perl 5.14 for this test", 1 if $] < 5.014000;
+  skip "Need Perl 5.12 for this test", 1 if $] < 5.012000;
   is( exception { require $file }, undef, "$file is really a valid file" );
 }
 
