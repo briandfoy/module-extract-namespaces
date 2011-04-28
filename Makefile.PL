@@ -1,13 +1,13 @@
 use ExtUtils::MakeMaker;
 
-require 5.006;
+require 5.008;
 
-eval "use Test::Manifest 1.14";
+eval "use Test::Manifest 1.21";
 
 WriteMakefile(
 	'NAME'	       => 'Module::Extract::Namespaces',
 	'ABSTRACT'     => 'This is what the module does',
-	'VERSION_FROM' => 'lib/Namespaces.pm',
+	'VERSION_FROM' => 'lib/Module/Extract/Namespaces.pm',
 	'LICENSE'      => 'perl',
 	'AUTHOR'       => 'brian d foy <bdfoy@cpan.org>',
 	
@@ -20,14 +20,6 @@ WriteMakefile(
 		no_index => {
 			directory => [ qw(inc t corpus) ],
 			},
-		},
-		
-	'PM'           => {
-		'lib/Namespaces.pm'         => '$(INST_LIBDIR)/Namespaces.pm',
-		},
-
-	'MAN3PODS'     => {
-		'lib/Namespaces.pm' => '$(INST_MAN3DIR)/Module::Extract::Namespaces.3',
 		},
 
 	clean  => { FILES    => q|Module-Extract-Namespaces-*| },

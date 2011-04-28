@@ -13,12 +13,11 @@ the file, you can read it with perldoc.
 If you want to read it before you install it, you can use
 perldoc directly on the module file.
 
-	perldoc  lib/Namespaces.pm
+	perldoc  lib/Module/Extract/Namespaces.pm
 	
-This module is also in CVS on SourceForge
+This module is also in Github:
 
-	http://sourceforge.net/projects/brian-d-foy/
-
+	https://github.com/briandfoy/module-extract-namespaces
 
 Enjoy, 
 
