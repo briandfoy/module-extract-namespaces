@@ -1,4 +1,3 @@
-# $Id$
 package Module::Extract::Namespaces;
 use strict;
 
