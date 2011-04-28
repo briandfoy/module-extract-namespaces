@@ -295,7 +295,7 @@ the 2008 Oslo QA Hackathon where I created this module.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2008, brian d foy, All Rights Reserved.
+Copyright (c) 2008-2011, brian d foy, All Rights Reserved.
 
 You may redistribute this under the same terms as Perl itself.
 
