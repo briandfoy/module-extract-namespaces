@@ -86,7 +86,7 @@ sub from_module {
 
 	}
 
-=item from_file( FILENAME )
+=item from_file( FILENAME [,WITH_VERSIONS] )
 
 Extract the namespaces declared in FILENAME. In list context, it returns
 all of the namespaces, including possible duplicates. In scalar context
@@ -99,23 +99,28 @@ On failure it returns nothing, but you have to check with C<error> to
 see if that is really an error or a file with no namespaces in it.
 
 =cut
-	
-sub from_file
-	{
-	my( $class, $file ) = @_;
+
+sub from_file {
+	my( $class, $file, $with_versions ) = @_;
 
 	$class->_clear_error;
-	
+
 	unless( -e $file ) {
 		$class->_set_error( "File [$file] does not exist!" );
 		return;
 		}
-	
+
 	my $Document = $class->get_pdom( $file );
 	return unless $Document;
-	
-	my @namespaces = $class->get_namespaces_from_pdom( $Document );
-	
+
+	my $method = $with_versions ?
+		'get_namespaces_and_versions_from_pdom'
+		:
+		'get_namespaces_from_pdom'
+		;
+
+	my @namespaces = $class->$method( $Document );
+
 	if( wantarray ) { @namespaces }
 	else            { $namespaces[0] }
 	}
