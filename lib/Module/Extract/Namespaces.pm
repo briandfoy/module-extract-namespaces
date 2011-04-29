@@ -23,7 +23,7 @@ Module::Extract::Namespaces - extract the package declarations from a module
 	# in scalar context, extract first package namespace
 	my $namespace  = Module::Extract::Namespaces->from_file( $filename );
 	if( Module::Extract::Namespaces->error ) { ... }
-	
+
 	# in list context, extract all namespaces
 	my @namespaces = Module::Extract::Namespaces->from_file( $filename );
 	if( Module::Extract::Namespaces->error ) { ... }
@@ -32,7 +32,7 @@ Module::Extract::Namespaces - extract the package declarations from a module
 =head1 DESCRIPTION
 
 This module extracts package declarations from Perl code without running the
-code. 
+code.
 
 It does not extract:
 
@@ -64,20 +64,19 @@ see if that is really an error or a file with no namespaces in it.
 
 =cut
 
-sub from_module
-	{
+sub from_module {
 	croak "from_module not yet implemented!";
 
 =begin comment
-	
+
 	my( $class, $module, @dirs ) = @_;
 
 	$class->_clear_error;
-	
+
 	my $relative_path = $class->_module_to_file( $module );
 	my $absolute_path = $class->_rel2abs( $relative_path );
-	
-	
+
+
 	if( wantarray ) { my @a = $class->from_file( $absolute_path ) }
 	else            { scalar  $class->from_file( $absolute_path ) }
 
@@ -107,8 +106,7 @@ sub from_file
 
 	$class->_clear_error;
 	
-	unless( -e $file )
-		{
+	unless( -e $file ) {
 		$class->_set_error( "File [$file] does not exist!" );
 		return;
 		}
@@ -121,6 +119,7 @@ sub from_file
 	if( wantarray ) { @namespaces }
 	else            { $namespaces[0] }
 	}
+
 
 =back
 
@@ -143,7 +142,7 @@ sub pdom_base_class { 'PPI' }
 
 =item $class->pdom_document_class()
 
-Return the class name to use to create the PDOM object. This is 
+Return the class name to use to create the PDOM object. This is
 C<PPI::Document>.
 
 =cut
@@ -158,12 +157,11 @@ and C<pdom_document_class>.
 
 =cut
 
-sub get_pdom
-	{
+sub get_pdom {
 	my( $class, $file ) = @_;
-		
+
 	my $pdom_class = $class->pdom_base_class;
-	
+
 	eval "require $pdom_class";
 
 	my $Document = eval {
@@ -171,17 +169,16 @@ sub get_pdom
 
 		my $d = $pdom_document_class->new( $file );
 		die $pdom_document_class->errstr unless $d;
-		
+
 		$class->pdom_preprocess( $d );
 		$d;
 		};
 
-	if( $@ )
-		{
+	if( $@ ) {
 		$class->_set_error( "Could not get PDOM for $file: $@" );
 		return;
 		}
-		
+
 	$Document;
 	}
 
@@ -194,15 +191,14 @@ By default, it strips Pod and comments from the PDOM.
 
 =cut
 
-sub pdom_preprocess      
-	{ 
+sub pdom_preprocess {
 	my( $class, $Document ) = @_;
 
 	eval {
 		$class->pdom_strip_pod( $Document );
 		$class->pdom_strip_comments( $Document );
 		};
-		
+
 	return 1;
 	}
 
@@ -225,7 +221,7 @@ sub pdom_strip_comments { $_[1]->prune('PPI::Token::Comment') }
 =item $class->get_namespaces_from_pdom( PDOM )
 
 Extract the namespaces from the PDOM. It returns a list of package
-names in the order that it finds them in the PDOM. It does not 
+names in the order that it finds them in the PDOM. It does not
 remove duplicates (do that later if you like).
 
 =cut
