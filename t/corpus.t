@@ -48,13 +48,9 @@ is_deeply( $namespaces, [], "No modules extracted from missing file" );
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #	
 # Test with a file that does exist, but isn't Perl
-TODO: {
-local $TODO = "Somehow PPI still creates an object";
 my $file = catfile( qw(corpus not_perl.txt) );
 ok( -e $file, "Non Perl file [$file] exists" );
 
 my $rc = eval {  $class->$method( $file ) };
 my $at = $@;
 ok( ! defined $rc,  "$method returns undef for non-Perl file [$file]" );
-like( $class->error, qr/PDOM/, "Trying to parse non-Perl file sets right error" );
-}
