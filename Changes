@@ -1,5 +1,10 @@
 # Changes for Module::Extract::Namespaces
 
+0.14_01 - Fri Apr 29 08:01:08 2011
+	* Handle the Perl 5.12 package NAME VERSION BLOCK syntax,
+	even if you aren't using Perl 5.12. It's just PPI, so it's
+	not actually running code.
+
 0.14 - Wed Oct 29 12:59:58 2008
 	* Adding an error() method so you can check what went wrong.
 	That means no more carping and stomping all over your terminal
