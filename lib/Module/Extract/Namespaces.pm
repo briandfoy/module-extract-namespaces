@@ -21,7 +21,7 @@ Module::Extract::Namespaces - extract the package declarations from a module
 	use Module::Extract::Namespaces;
 
 	# in scalar context, extract first package namespace
-	my $namespace  = Module::Extract::Namespaces->from_module( 'Foo::Bar' );
+	my $namespace  = Module::Extract::Namespaces->from_file( $filename );
 	if( Module::Extract::Namespaces->error ) { ... }
 	
 	# in list context, extract all namespaces
