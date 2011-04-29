@@ -27,7 +27,12 @@ Module::Extract::Namespaces - extract the package declarations from a module
 	# in list context, extract all namespaces
 	my @namespaces = Module::Extract::Namespaces->from_file( $filename );
 	if( Module::Extract::Namespaces->error ) { ... }
-	
+
+	# can do the Perl 5.12 package syntax with possible versions
+	# in list context, extract all namespaces and versions as duples
+	my @namespaces = Module::Extract::Namespaces->from_file( $filename, 1 );
+	if( Module::Extract::Namespaces->error ) { ... }
+
 
 =head1 DESCRIPTION
 
