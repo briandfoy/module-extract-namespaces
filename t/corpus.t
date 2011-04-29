@@ -15,19 +15,18 @@ can_ok( $class, $method );
 # Test with files that exist
 {
 my %Corpus = (
-	'None.pm'           => [],   # Perl code but no package
-	'Empty.pm'          => [],   # nothing in the file
-	'DifferentLines.pm' => [ 'Foo::Comment', 'Foo::Newline' ],
-	'Multiple.pm'       => [ map "Foo::$_", qw(First Second Third) ],
-	'Duplicates.pm'     => [ map "Foo::$_", qw(First Second Third First) ],
+	'None.pm'              => [],   # Perl code but no package
+	'Empty.pm'             => [],   # nothing in the file
+	'DifferentLines.pm'    => [ 'Foo::Comment', 'Foo::Newline' ],
+	'Multiple.pm'          => [ map "Foo::$_", qw(First Second Third) ],
+	'Duplicates.pm'        => [ map "Foo::$_", qw(First Second Third First) ],
+	'NewPackageSyntax.pm'  => [ qw(Mimi Buster Roscoe Addy) ],
 	);
-	
-foreach my $file ( sort keys %Corpus )
-	{
-	my $path = 
-	catfile( 'corpus', $file );
+
+foreach my $file ( sort keys %Corpus ) {
+	my $path = catfile( 'corpus', $file );
 	ok( -e $path, "Corpus file [ $path ] exists" );
-	
+
 	my $namespaces = [ $class->$method( $path ) ];
 	ok( ! $class->error, "No error from good file [$file]");
 	is_deeply( $namespaces, $Corpus{$file}, "Extracts right namespaces for $file" );
