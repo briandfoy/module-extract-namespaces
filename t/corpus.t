@@ -35,6 +35,30 @@ foreach my $file ( sort keys %Corpus )
 }
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #	
+# Test with a Perl 5.12 file
+{
+my %Corpus = (
+	'NewPackageSyntax.pm'  => [
+		[ qw(Mimi 4.56)     ],
+		[ qw(Buster), undef ],
+		[ qw(Roscoe v1.0.1) ],
+		[ qw(Addy), undef   ],
+		],
+	);
+
+foreach my $file ( sort keys %Corpus ) {
+	my $path = catfile( 'corpus', $file );
+	ok( -e $path, "Corpus file [ $path ] exists" );
+
+	my $namespaces = [ $class->$method( $path, 1 ) ];
+	ok( ! $class->error, "No error from good file [$file]");
+	is_deeply( $namespaces, $Corpus{$file}, "Extracts right namespaces for $file" );
+	}
+}
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Test with a file that doesn't exist
 {
 my $file = "foobarbazquux.html.gz.pm";
