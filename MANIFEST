@@ -3,7 +3,9 @@ corpus/DifferentLines.pm
 corpus/Duplicates.pm
 corpus/Empty.pm
 corpus/Multiple.pm
+corpus/NewPackageSyntax.pm
 corpus/None.pm
+corpus/not_perl.txt
 examples/placeholder.pl
 lib/Module/Extract/Namespaces.pm
 LICENSE
