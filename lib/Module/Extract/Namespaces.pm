@@ -7,7 +7,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.14_01';
+$VERSION = '0.14_02';
 
 use Carp qw(croak);
 use PPI;
@@ -240,6 +240,7 @@ BEGIN {
 
 if( $PPI::VERSION <= 1.215 ) {
 	no warnings 'redefine';
+	sub PPI::Statement::Package::__LEXER__normal { '' }
 	sub PPI::Lexer::_continues {
 		package PPI::Lexer;
 		my ($self, $Statement, $Token) = @_;
