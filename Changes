@@ -1,5 +1,10 @@
 # Changes for Module::Extract::Namespaces
 
+0.14_02 - Sat Apr 30 11:44:49 2011
+	* I forgot to add the lexer hint for ::Package for the 
+	monkey patch. That patch is only there until PPI updates
+	for the patch.
+
 0.14_01 - Fri Apr 29 08:01:08 2011
 	* Handle the Perl 5.12 package NAME VERSION BLOCK syntax,
 	even if you aren't using Perl 5.12. It's just PPI, so it's
