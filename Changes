@@ -1,8 +1,6 @@
 # Changes for Module::Extract::Namespaces
 
 1.01 - Tue May  7 19:19:26 2013
-
-0.14_02 - Tue May  7 19:17:14 2013
 	* Implement from_module so you can specify a namespace
 	instead of a filename
 
