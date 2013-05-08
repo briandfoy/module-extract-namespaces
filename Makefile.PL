@@ -6,7 +6,7 @@ eval "use Test::Manifest 1.21";
 
 WriteMakefile(
 	'NAME'	       => 'Module::Extract::Namespaces',
-	'ABSTRACT'     => 'This is what the module does',
+	'ABSTRACT'     => 'extract the package declarations from a module',
 	'VERSION_FROM' => 'lib/Module/Extract/Namespaces.pm',
 	'LICENSE'      => 'perl',
 	'AUTHOR'       => 'brian d foy <bdfoy@cpan.org>',
