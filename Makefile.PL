@@ -18,7 +18,7 @@ WriteMakefile(
 
 	'META_MERGE'   => {
 		no_index => {
-			directory => [ qw(inc t corpus) ],
+			directory => [ qw(inc t corpus examples) ],
 			},
 		},
 
