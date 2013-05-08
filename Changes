@@ -1,5 +1,9 @@
 # Changes for Module::Extract::Namespaces
 
+0.14_02 - Tue May  7 19:17:14 2013
+	* Implement from_module so you can specify a namespace
+	instead of a filename
+
 0.14_02 - Sat Apr 30 11:44:49 2011
 	* I forgot to add the lexer hint for ::Package for the 
 	monkey patch. That patch is only there until PPI updates
