@@ -7,7 +7,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '0.14_02';
+$VERSION = '1.01';
 
 use Carp qw(croak);
 use File::Spec::Functions qw(splitdir catfile);
