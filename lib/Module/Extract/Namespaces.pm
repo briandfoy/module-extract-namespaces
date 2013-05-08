@@ -10,6 +10,7 @@ use vars qw($VERSION);
 $VERSION = '0.14_02';
 
 use Carp qw(croak);
+use File::Spec::Functions qw(splitdir catfile);
 use PPI;
 
 =head1 NAME
@@ -36,8 +37,8 @@ Module::Extract::Namespaces - extract the package declarations from a module
 
 =head1 DESCRIPTION
 
-This module extracts package declarations from Perl code without running the
-code.
+This module extracts package declarations from Perl code without
+running the code.
 
 It does not extract:
 
@@ -53,16 +54,17 @@ It does not extract:
 
 =over 4
 
-=item from_module( MODULE )
-
-****NOT YET IMPLEMENTED****
+=item from_module( MODULE, [ @DIRS ] )
 
 Extract the namespaces declared in MODULE. In list context, it returns
-all of the namespaces, including possible duplicates. In scalar context
-it returns the first declared namespace.
+all of the namespaces, including possible duplicates. In scalar
+context it returns the first declared namespace.
 
-If it cannot find MODULE in @INC, it returns undef in scalar context and
-the empty list in list context.
+You can specify a list of directories to search for the module. If you
+don't, it uses C<@INC> by default.
+
+If it cannot find MODULE, it returns undef in scalar context and the
+empty list in list context.
 
 On failure it returns nothing, but you have to check with C<error> to
 see if that is really an error or a file with no namespaces in it.
@@ -70,35 +72,53 @@ see if that is really an error or a file with no namespaces in it.
 =cut
 
 sub from_module {
-	croak "from_module not yet implemented!";
-
-=begin comment
-
 	my( $class, $module, @dirs ) = @_;
 
+	@dirs = @INC unless @dirs;
 	$class->_clear_error;
 
-	my $relative_path = $class->_module_to_file( $module );
-	my $absolute_path = $class->_rel2abs( $relative_path );
-
+	my $absolute_path = $class->_module_to_file( $module, @dirs );
+	unless( defined $absolute_path ) {
+		$class->_set_error( "Did not find module [$module] in [@dirs]!" );
+		return;
+		}
 
 	if( wantarray ) { my @a = $class->from_file( $absolute_path ) }
 	else            { scalar  $class->from_file( $absolute_path ) }
+	}
 
-=end comment
+sub _module_to_file {
+	my( $class, $module, @dirs ) = @_;
 
-=cut
+	my @module_parts = split /\b(?:::|')\b/, $module;
+	$module_parts[-1] .= '.pm';
+	
+	foreach my $dir ( @dirs ) {
+		unless( -d $dir ) {
+			carp( "The path [$dir] does not appear to be a directory" );
+			next;
+			}
+		my @dir_parts = splitdir( $dir );
+		my $path = catfile( @dir_parts, @module_parts );
+		next unless -e $path;
+		return $path;
+		}
+
+	return;
+	}
+	
+sub _rel2abs {
 
 	}
 
 =item from_file( FILENAME [,WITH_VERSIONS] )
 
-Extract the namespaces declared in FILENAME. In list context, it returns
-all of the namespaces, including possible duplicates. In scalar context
-it returns the first declared namespace.
+Extract the namespaces declared in FILENAME. In list context, it
+returns all of the namespaces, including possible duplicates. In
+scalar context it returns the first declared namespace.
 
-If FILENAME does not exist, it returns undef in scalar context and
-the empty list in list context.
+If FILENAME does not exist, it returns undef in scalar context and the
+empty list in list context.
 
 On failure it returns nothing, but you have to check with C<error> to
 see if that is really an error or a file with no namespaces in it.
@@ -139,9 +159,9 @@ sub from_file {
 
 =item $class->pdom_base_class()
 
-Return the base class for the PDOM. This is C<PPI> by default. If you want
-to use something else, you'll have to change all the other PDOM methods
-to adapt to the different interface.
+Return the base class for the PDOM. This is C<PPI> by default. If you
+want to use something else, you'll have to change all the other PDOM
+methods to adapt to the different interface.
 
 This is the class name to use with C<require> to load the module that
 while handle the parsing.
@@ -162,8 +182,8 @@ sub pdom_document_class { 'PPI::Document' }
 
 =item get_pdom( FILENAME )
 
-Creates the PDOM from FILENAME. This depends on calls to C<pdom_base_class>
-and C<pdom_document_class>.
+Creates the PDOM from FILENAME. This depends on calls to
+C<pdom_base_class> and C<pdom_document_class>.
 
 =cut
 
@@ -624,13 +644,14 @@ This code is in Github:
 
 brian d foy, C<< <bdfoy@cpan.org> >>
 
-This module was partially funded by The Perl Foundation (www.perlfoundation.org)
-and LogicLAB (www.logiclab.dk), both of whom provided travel assistance to
-the 2008 Oslo QA Hackathon where I created this module.
+This module was partially funded by The Perl Foundation
+(www.perlfoundation.org) and LogicLAB (www.logiclab.dk), both of whom
+provided travel assistance to the 2008 Oslo QA Hackathon where I
+created this module.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2008-2011, brian d foy, All Rights Reserved.
+Copyright (c) 2008-2013, brian d foy, All Rights Reserved.
 
 You may redistribute this under the same terms as Perl itself.
 
