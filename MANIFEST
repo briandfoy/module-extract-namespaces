@@ -11,8 +11,7 @@ lib/Module/Extract/Namespaces.pm
 LICENSE
 Makefile.PL
 MANIFEST			This list of files
-MYMETA.json
-MYMETA.yml
+MANIFEST.SKIP
 README
 t/corpus.t
 t/from_module.t
