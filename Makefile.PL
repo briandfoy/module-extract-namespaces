@@ -10,7 +10,7 @@ WriteMakefile(
 	'VERSION_FROM' => 'lib/Module/Extract/Namespaces.pm',
 	'LICENSE'      => 'perl',
 	'AUTHOR'       => 'brian d foy <bdfoy@cpan.org>',
-	
+
 	'PREREQ_PM'    => { 
 		'Test::More' => '0',
 		'PPI'        => '0',
@@ -23,5 +23,16 @@ WriteMakefile(
 		},
 
 	clean  => { FILES    => q|Module-Extract-Namespaces-*| },
+
+	META_MERGE => {
+		'meta-spec' => { version => 2 },
+		resources => {
+			repository => {
+				type => 'git',
+				url  => 'https://github.com/briandfoy/module-extract-namespaces.git',
+				web  => 'https://github.com/briandfoy/module-extract-namespaces',
+			},
+		},
+	},
 
 	);
