@@ -50,7 +50,7 @@ my %WriteMakefile = (
 			},
 		},
 
-	clean  => { FILES    => q|Module-Extract-Namespaces-*| },
+	clean => { FILES => "$dist-*" },
 	);
 
 sub arguments { \%WriteMakefile }
