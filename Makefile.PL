@@ -5,6 +5,8 @@ use warnings;
 use File::Spec::Functions qw(catfile);
 
 my $module    = 'Module::Extract::Namespaces';
+( my $dist = $module ) =~ s/::/-/g;
+
 my $github    = 'https://github.com/briandfoy/module-extract-namespaces';
 my $main_file = catfile( 'lib', split /::/, "$module.pm" );
 
