@@ -1,10 +1,12 @@
 require 5.008;
+
+package Module::Extract::Namespaces;
 use strict;
 use warnings;
 
 use File::Spec::Functions qw(catfile);
 
-my $module    = 'Module::Extract::Namespaces';
+my $module    = __PACKAGE__;
 ( my $dist = $module ) =~ s/::/-/g;
 
 my $github    = 'https://github.com/briandfoy/module-extract-namespaces';
