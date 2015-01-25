@@ -13,6 +13,8 @@ use Carp qw(croak);
 use File::Spec::Functions qw(splitdir catfile);
 use PPI;
 
+=encoding utf8
+
 =head1 NAME
 
 Module::Extract::Namespaces - extract the package declarations from a module
