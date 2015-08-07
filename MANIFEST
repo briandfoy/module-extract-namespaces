@@ -7,6 +7,7 @@ corpus/NewPackageSyntax.pm
 corpus/None.pm
 corpus/not_perl.txt
 examples/placeholder.pl
+INSTALL.SKIP
 lib/Module/Extract/Namespaces.pm
 LICENSE
 Makefile.PL
