@@ -65,6 +65,7 @@ my %WriteMakefile = (
 		},
 
 	'PREREQ_PM'     => {
+		'PPI' => '1.126'
 		},
 
 	'META_MERGE' => {
