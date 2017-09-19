@@ -351,7 +351,7 @@ created this module.
 
 Copyright © 2008-2015, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
-You may redistribute this under the same terms as Perl itself.
+You may redistribute this under the Artistic License 2.0.
 
 =cut
 
