@@ -7,7 +7,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '1.02';
+$VERSION = '1.021';
 
 use Carp qw(croak);
 use File::Spec::Functions qw(splitdir catfile);
@@ -349,7 +349,7 @@ created this module.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright © 2008-2015, brian d foy <bdfoy@cpan.org>. All rights reserved.
+Copyright © 2008-2017, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
 You may redistribute this under the Artistic License 2.0.
 
