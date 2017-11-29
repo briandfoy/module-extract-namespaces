@@ -18,4 +18,3 @@ is( $rc, $class, "Scalar context returns $class" );
 my @rc = sort $class->$method( $class, 'blib/lib' );
 ok( @rc == 2, 'Eval returns list of two items' );
 is( $rc[0], $class, "List context returns $class as the first item" );
-is( $rc[1], 'PPI::Lexer', "List context returns PPI::Lexer as the second item" );
