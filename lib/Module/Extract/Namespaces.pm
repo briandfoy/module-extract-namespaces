@@ -108,10 +108,6 @@ sub _module_to_file {
 
 	return;
 	}
-	
-sub _rel2abs {
-
-	}
 
 =item from_file( FILENAME [,WITH_VERSIONS] )
 
