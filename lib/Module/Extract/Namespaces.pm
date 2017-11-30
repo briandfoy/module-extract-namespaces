@@ -11,7 +11,7 @@ $VERSION = '1.021';
 
 use Carp qw(croak);
 use File::Spec::Functions qw(splitdir catfile);
-use PPI;
+use PPI 1.126;
 
 =encoding utf8
 
