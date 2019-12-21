@@ -207,6 +207,8 @@ sub get_pdom {
 		$d;
 		};
 
+	print STDERR Dumper( $Document ); use Data::Dumper;
+
 	if( $@ ) {
 		print STDERR "Could not parse [$file]: $@\n";
 		$class->_set_error( "Could not get PDOM for $file: $@" );
