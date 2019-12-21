@@ -7,7 +7,7 @@ no warnings;
 use subs qw();
 use vars qw($VERSION);
 
-$VERSION = '1.021';
+$VERSION = '1.021_01';
 
 use Carp qw(croak);
 use File::Spec::Functions qw(splitdir catfile);
@@ -94,7 +94,7 @@ sub _module_to_file {
 
 	my @module_parts = split /\b(?:::|')\b/, $module;
 	$module_parts[-1] .= '.pm';
-	
+
 	foreach my $dir ( @dirs ) {
 		unless( -d $dir ) {
 			carp( "The path [$dir] does not appear to be a directory" );
@@ -129,12 +129,16 @@ sub from_file {
 	$class->_clear_error;
 
 	unless( -e $file ) {
+		print STDERR "from_file: [$file] does not exist\n";
 		$class->_set_error( "File [$file] does not exist!" );
 		return;
 		}
 
 	my $Document = $class->get_pdom( $file );
-	return unless $Document;
+	unless( $Document ) {
+		print STDERR "\$Document is undefined.";
+		return;
+		}
 
 	my $method = $with_versions ?
 		'get_namespaces_and_versions_from_pdom'
@@ -190,7 +194,8 @@ sub get_pdom {
 
 	my $pdom_class = $class->pdom_base_class;
 
-	eval "require $pdom_class";
+	eval "require $pdom_class; 1" or
+		print STDERR "Could not load [$pdom_class]: $@\n";
 
 	my $Document = eval {
 		my $pdom_document_class = $class->pdom_document_class;
@@ -203,6 +208,7 @@ sub get_pdom {
 		};
 
 	if( $@ ) {
+		print STDERR "Could not parse [$file]: $@\n";
 		$class->_set_error( "Could not get PDOM for $file: $@" );
 		return;
 		}
