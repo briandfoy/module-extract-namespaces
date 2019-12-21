@@ -334,7 +334,7 @@ sub error        { $Error }
 
 This code is in Github:
 
-	git://github.com/briandfoy/module-extract-namespaces.git
+	http://github.com/briandfoy/module-extract-namespaces
 
 =head1 AUTHOR
 
