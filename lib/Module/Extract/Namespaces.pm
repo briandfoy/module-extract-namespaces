@@ -129,14 +129,12 @@ sub from_file {
 	$class->_clear_error;
 
 	unless( -e $file ) {
-		print STDERR "from_file: [$file] does not exist\n";
 		$class->_set_error( "File [$file] does not exist!" );
 		return;
 		}
 
 	my $Document = $class->get_pdom( $file );
 	unless( $Document ) {
-		print STDERR "\$Document is undefined.";
 		return;
 		}
 
@@ -194,8 +192,7 @@ sub get_pdom {
 
 	my $pdom_class = $class->pdom_base_class;
 
-	eval "require $pdom_class; 1" or
-		print STDERR "Could not load [$pdom_class]: $@\n";
+	eval "require $pdom_class; 1";
 
 	my $Document = eval {
 		my $pdom_document_class = $class->pdom_document_class;
@@ -207,10 +204,7 @@ sub get_pdom {
 		$d;
 		};
 
-	print STDERR Dumper( $Document ); use Data::Dumper;
-
 	if( $@ ) {
-		print STDERR "Could not parse [$file]: $@\n";
 		$class->_set_error( "Could not get PDOM for $file: $@" );
 		return;
 		}
