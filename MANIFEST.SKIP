@@ -63,3 +63,6 @@
 \.lwpcookies
 research
 Module-.*
+\bMANIFEST\s\d
+\bChanges\s\d
+
