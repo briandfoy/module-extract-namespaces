@@ -1,3 +1,5 @@
+use 5.008;
+
 package Module::Extract::Namespaces;
 use strict;
 
