@@ -6,9 +6,7 @@ use strict;
 use warnings;
 no warnings;
 
-use vars qw($VERSION);
-
-$VERSION = '1.021_01';
+our $VERSION = '1.022';
 
 use Carp qw(croak);
 use File::Spec::Functions qw(splitdir catfile);
