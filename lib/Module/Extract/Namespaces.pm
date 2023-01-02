@@ -346,7 +346,7 @@ created this module.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright © 2008-2022, brian d foy <bdfoy@cpan.org>. All rights reserved.
+Copyright © 2008-2023, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
 You may redistribute this under the Artistic License 2.0.
 
